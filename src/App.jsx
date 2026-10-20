@@ -245,7 +245,7 @@ const PAREPARE_HUMAS_POSTS = [
     timeAgo: '19 Okt • Baru saja',
     likes: '840',
     comments: 42,
-    url: 'https://www.instagram.com/humaskotaparepare/',
+    url: 'https://www.instagram.com/p/DemIJ8tTb3p/',
     position: 'center center', // Tampilan wide banner sempurna
   },
   {
