@@ -424,7 +424,7 @@ function App() {
 
       {/* Header (Beranda) */}
       {activeTab === 'beranda' && (
-        <header className="pt-4 px-4 pb-[50px] md:pt-6 md:px-12 md:pb-[70px] text-white flex flex-col relative z-10 shadow-md rounded-b-[28px] md:rounded-b-[40px] overflow-hidden bg-[linear-gradient(135deg,rgba(11,37,69,0.85)_0%,rgba(6,23,42,0.95)_100%),url('/parepare_gate_vector.jpg')] bg-center bg-cover">
+        <header className="pt-4 px-4 pb-[50px] md:pt-6 md:px-12 md:pb-[70px] text-white flex flex-col relative z-10 shadow-md rounded-b-[28px] md:rounded-b-[40px] overflow-hidden bg-[linear-gradient(135deg,rgba(37,99,235,0.92)_0%,rgba(29,78,216,0.96)_100%),url('/parepare_gate_vector.jpg')] bg-center bg-cover">
 
           {/* Header pseudo element equivalent */}
           <div className="absolute -top-[50px] -right-[50px] w-[250px] h-[250px] rounded-full pointer-events-none z-0 bg-gradient-radial from-white/20 to-70% to-transparent"></div>
