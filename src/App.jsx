@@ -435,7 +435,7 @@ function App() {
                 <img src="/logo-parepare.png" alt="SuperBie" className="w-[34px] md:w-[36px] h-auto object-contain rounded-xl drop-shadow-sm" />
                 <div className="flex flex-col items-start justify-center">
                   <h1 className="flex items-center m-0 text-white font-bold text-xl md:text-2xl tracking-tight">
-                    Super<span className="text-blue-400 font-extrabold">B</span><span className="text-secondary">ie</span>
+                    Super<span className="font-extrabold bg-gradient-to-r from-sky-300 to-cyan-200 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(56,189,248,0.45)]">Bie</span>
                   </h1>
                   <span className="text-[0.65rem] md:text-[0.75rem] opacity-85 font-medium leading-none mt-0.5 tracking-wide text-white">SuperApps Parepare</span>
                 </div>
