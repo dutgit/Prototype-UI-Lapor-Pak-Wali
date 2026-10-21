@@ -3,6 +3,16 @@ import { createPortal } from 'react-dom';
 import './index.css';
 import ProfileTab from './ProfileTab';
 import ActivityTab from './ActivityTab';
+import {
+  LaporIllustration,
+  PasarIllustration,
+  CuacaIllustration,
+  JdihIllustration,
+  DaruratIllustration,
+  KtpIllustration,
+  RsudIllustration,
+  LainnyaIllustration,
+} from './ServiceIcons';
 
 const PROFILE_STORAGE_KEY = 'superbie_profile_v1';
 const DEFAULT_PROFILE = {
@@ -23,10 +33,22 @@ const HomeIcon = ({ size = 24, className = "" }) => <svg width={size} height={si
 const ActivityIcon = ({ size = 24, className = "" }) => <svg width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>;
 const BellIcon = ({ size = 24, className = "" }) => <svg width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>;
 
-const SiphpIcon = () => <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>;
-const LaporIcon = () => <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>;
-const WeatherIcon = () => <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M20 12h2"></path><path d="M19.07 4.93l-1.41 1.41"></path><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"></path><path d="M3 20a5 5 0 1 1 8.9-4H21a2 2 0 1 1 0 4Z"></path></svg>;
-const JdihIcon = () => <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
+const LaporIcon = () => (
+  <svg width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m3 11 18-5v12L3 14v-3z"></path>
+    <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
+  </svg>
+);
+const WeatherIcon = () => (
+  <svg width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="M20 12h2"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+    <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"></path>
+    <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"></path>
+  </svg>
+);
 
 const CameraIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>;
 const MapPinIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
@@ -36,33 +58,6 @@ const InstagramIcon = () => (
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-  </svg>
-);
-const MoreGridIcon = () => (
-  <svg width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
-    <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
-    <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
-    <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
-  </svg>
-);
-const PhoneCallIcon = () => (
-  <svg width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-  </svg>
-);
-const IdCardIcon = () => (
-  <svg width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-    <line x1="2" y1="10" x2="22" y2="10"></line>
-  </svg>
-);
-const HospitalIcon = () => (
-  <svg width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 21h18"></path>
-    <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path>
-    <path d="M9 10h6"></path>
-    <path d="M12 7v6"></path>
   </svg>
 );
 const XIcon = () => (
@@ -424,21 +419,19 @@ function App() {
 
       {/* Header (Beranda) */}
       {activeTab === 'beranda' && (
-        <header className="pt-4 px-4 pb-[50px] md:pt-6 md:px-12 md:pb-[70px] text-white flex flex-col relative z-10 shadow-md rounded-b-[28px] md:rounded-b-[40px] overflow-hidden bg-[linear-gradient(135deg,rgba(37,99,235,0.92)_0%,rgba(29,78,216,0.96)_100%),url('/parepare_gate_vector.jpg')] bg-center bg-cover">
+        <header className="pt-4 px-4 pb-[50px] md:pt-6 md:px-12 md:pb-[70px] text-white flex flex-col relative z-10 shadow-md rounded-b-[28px] md:rounded-b-[40px] overflow-hidden bg-gradient-to-br from-blue-600 to-blue-700">
 
           {/* Header pseudo element equivalent */}
           <div className="absolute -top-[50px] -right-[50px] w-[250px] h-[250px] rounded-full pointer-events-none z-0 bg-gradient-radial from-white/20 to-70% to-transparent"></div>
 
           <div className="flex justify-between items-center w-full relative z-10">
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2 md:gap-2.5 cursor-pointer" onClick={() => setActiveTab('beranda')}>
-                <img src="/logo-parepare.png" alt="SuperBie" className="w-[34px] md:w-[36px] h-auto object-contain rounded-xl drop-shadow-sm" />
-                <div className="flex flex-col items-start justify-center">
-                  <h1 className="flex items-center m-0 text-white font-bold text-xl md:text-2xl tracking-tight">
-                    Super<span className="font-extrabold bg-gradient-to-r from-sky-300 to-cyan-200 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(56,189,248,0.45)]">Bie</span>
-                  </h1>
-                  <span className="text-[0.65rem] md:text-[0.75rem] opacity-85 font-medium leading-none mt-0.5 tracking-wide text-white">SuperApps Parepare</span>
-                </div>
+              <div className="flex items-center cursor-pointer" onClick={() => setActiveTab('beranda')}>
+                <img
+                  src="/logo-superbie-dark.png?v=transparent"
+                  alt="SuperBie"
+                  className="h-10 md:h-12 w-auto object-contain drop-shadow-sm select-none"
+                />
               </div>
             </div>
 
@@ -571,7 +564,7 @@ function App() {
           })()}
 
 
-          {/* Services Grid (Ala Gojek / SuperApp Style) */}
+          {/* Services Grid (Unified, Calm On-Tone Palette) */}
           <div className="flex justify-between items-center mb-3.5 relative z-10 animate-fade-up delay-200">
             <h3 className="text-[1.1rem] font-bold text-textPrimary">Layanan Utama</h3>
           </div>
@@ -579,16 +572,16 @@ function App() {
 
             {/* 1. Lapor Pak Wali */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.5rem] md:text-[1.8rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-service-lapor">
-                <LaporIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <LaporIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">Lapor Pak Wali</h4>
             </div>
 
             {/* 2. SIPHP Pasar */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.5rem] md:text-[1.8rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-service-siphp">
-                <SiphpIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <PasarIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">SIPHP Pasar</h4>
             </div>
@@ -601,53 +594,53 @@ function App() {
               }}
               className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group"
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.5rem] md:text-[1.8rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-service-cuaca">
-                <WeatherIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <CuacaIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">Info Cuaca</h4>
             </div>
 
             {/* 4. JDIH */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.5rem] md:text-[1.8rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-service-jdih">
-                <JdihIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <JdihIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">JDIH Hukum</h4>
             </div>
 
             {/* 5. Call 112 */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.35rem] md:text-[1.6rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-gradient-to-br from-rose-500 to-red-600">
-                <PhoneCallIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <DaruratIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">Call 112</h4>
             </div>
 
             {/* 6. Disdukcapil */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.35rem] md:text-[1.6rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-gradient-to-br from-teal-500 to-emerald-600">
-                <IdCardIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <KtpIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">Disdukcapil</h4>
             </div>
 
             {/* 7. RSUD Ainun */}
             <div className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.35rem] md:text-[1.6rem] text-white shadow-sm border border-white/50 backdrop-blur-sm transition-shadow group-hover:shadow-md bg-gradient-to-br from-indigo-500 to-blue-600">
-                <HospitalIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <RsudIllustration />
               </div>
               <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">RSUD Ainun</h4>
             </div>
 
-            {/* 8. Lainnya (Ala Gojek / SuperApp) */}
+            {/* 8. Lainnya */}
             <div 
               onClick={() => setIsServicesModalOpen(true)}
               className="flex flex-col items-center text-center cursor-pointer transition-transform active:scale-95 group"
             >
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-[20px] flex justify-center items-center mb-2 md:mb-3 text-[1.4rem] md:text-[1.6rem] text-slate-700 shadow-sm border border-slate-200/80 backdrop-blur-sm transition-colors group-hover:shadow-md bg-slate-100 group-hover:bg-blue-50 group-hover:text-secondary group-hover:border-blue-200">
-                <MoreGridIcon />
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full flex justify-center items-center mb-2 md:mb-3 p-2 md:p-2.5 bg-[#eaf2ff] transition-colors group-hover:bg-blue-100">
+                <LainnyaIllustration />
               </div>
-              <h4 className="text-[0.75rem] md:text-[0.8rem] font-bold text-textPrimary leading-tight group-hover:text-secondary">Lainnya</h4>
+              <h4 className="text-[0.75rem] md:text-[0.8rem] font-semibold text-textPrimary leading-tight">Lainnya</h4>
             </div>
 
           </div>
@@ -985,26 +978,26 @@ function App() {
                     onClick={() => { setIsServicesModalOpen(false); setActiveTab('aktivitas'); }}
                     className="flex flex-col items-center text-center cursor-pointer group"
                   >
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-xl bg-service-lapor shadow-xs group-hover:scale-105 transition-all">
-                      <LaporIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <LaporIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">Lapor Pak Wali</span>
                   </div>
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-xl bg-service-siphp shadow-xs group-hover:scale-105 transition-all">
-                      <SiphpIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <PasarIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">SIPHP Pasar</span>
                   </div>
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-xl bg-service-cuaca shadow-xs group-hover:scale-105 transition-all">
-                      <WeatherIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <CuacaIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">Info Cuaca</span>
                   </div>
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-xl bg-service-jdih shadow-xs group-hover:scale-105 transition-all">
-                      <JdihIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <JdihIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">JDIH Hukum</span>
                   </div>
@@ -1018,14 +1011,14 @@ function App() {
                 </h4>
                 <div className="grid grid-cols-4 gap-3">
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-lg bg-gradient-to-br from-rose-500 to-red-600 shadow-xs group-hover:scale-105 transition-all">
-                      <PhoneCallIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <DaruratIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">Call 112</span>
                   </div>
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-lg bg-gradient-to-br from-indigo-500 to-blue-600 shadow-xs group-hover:scale-105 transition-all">
-                      <HospitalIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <RsudIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">RSUD Ainun</span>
                   </div>
@@ -1039,8 +1032,8 @@ function App() {
                 </h4>
                 <div className="grid grid-cols-4 gap-3">
                   <div className="flex flex-col items-center text-center cursor-pointer group">
-                    <div className="w-12 h-12 rounded-2xl flex justify-center items-center mb-1.5 text-white text-lg bg-gradient-to-br from-teal-500 to-emerald-600 shadow-xs group-hover:scale-105 transition-all">
-                      <IdCardIcon />
+                    <div className="w-12 h-12 rounded-full flex justify-center items-center mb-1.5 p-1.5 bg-[#eaf2ff] group-hover:bg-blue-100 transition-colors">
+                      <KtpIllustration />
                     </div>
                     <span className="text-[11px] font-semibold text-slate-800 leading-tight">Disdukcapil</span>
                   </div>

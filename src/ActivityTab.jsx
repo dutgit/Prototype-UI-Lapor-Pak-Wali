@@ -38,19 +38,6 @@ const HeartIcon = ({ filled }) => (
   </svg>
 );
 
-const MessageCircleIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-  </svg>
-);
-
-const SendIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="22" y1="2" x2="11" y2="13"></line>
-    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-  </svg>
-);
-
 const ChevronRightIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="9 18 15 12 9 6"></polyline>
@@ -358,9 +345,6 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
 
   // Photo comparison mode in detail modal: 'split' | 'before' | 'after'
   const [photoCompareMode, setPhotoCompareMode] = useState('split');
-
-  // New comment input state
-  const [newCommentText, setNewCommentText] = useState('');
   
   // Rating feedback state inside modal
   const [modalRating, setModalRating] = useState(0);
@@ -401,7 +385,6 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
     setSelectedReportId(report.id);
     setModalRating(report.rating || 0);
     setPhotoCompareMode('split');
-    setNewCommentText('');
     setFeedbackSent(false);
     setIsModalScrolled(false);
     setTimeout(() => {
@@ -423,34 +406,6 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
       }
       return item;
     }));
-  };
-
-  // Submit New Comment
-  const handleAddComment = (e) => {
-    e.preventDefault();
-    const trimmed = newCommentText.trim();
-    if (!trimmed || !selectedReport) return;
-
-    const newComment = {
-      id: `c-${Date.now()}`,
-      author: `${currentUserName} (Saya)`,
-      role: selectedReport.isMine ? 'Pelapor' : 'Warga Parepare',
-      time: 'Baru saja',
-      text: trimmed,
-      isOpd: false,
-      isMe: true
-    };
-
-    setReports(prev => prev.map(item => {
-      if (item.id === selectedReport.id) {
-        return {
-          ...item,
-          comments: [...(item.comments || []), newComment]
-        };
-      }
-      return item;
-    }));
-    setNewCommentText('');
   };
 
   // Filtered reports
@@ -705,11 +660,11 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 shrink-0">
+                <div className="flex items-center gap-2 shrink-0">
                   {/* Upvote Button */}
                   <button
                     onClick={(e) => handleToggleLike(report.id, e)}
-                    className={`flex items-center gap-1 py-1 px-2 rounded-lg text-[11px] font-bold transition-all border ${
+                    className={`flex items-center gap-1 py-1 px-2.5 rounded-lg text-[11px] font-bold transition-all border ${
                       report.isLiked
                         ? 'bg-rose-50 border-rose-200 text-rose-600'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -718,19 +673,6 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
                   >
                     <HeartIcon filled={report.isLiked} />
                     <span>{report.likes}</span>
-                  </button>
-
-                  {/* Comments Count Pill */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenDetail(report);
-                    }}
-                    className="flex items-center gap-1 py-1 px-2 rounded-lg text-[11px] font-bold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all"
-                    title="Lihat Diskusi & Komentar"
-                  >
-                    <MessageCircleIcon />
-                    <span>{report.comments?.length || 0}</span>
                   </button>
 
                   {/* Clean Detail Action Button */}
@@ -1068,81 +1010,6 @@ export default function ActivityTab({ currentUserName = 'Ahmad Warga' }) {
                   )}
                 </div>
               )}
-
-              {/* DISKUSI & KOMENTAR WARGA SECTION */}
-              <div className="pt-2 border-t border-slate-150 flex flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                    <span>💬</span>
-                    <span>Komentar & Tanggapan ({selectedReport.comments?.length || 0})</span>
-                  </h4>
-                  <span className="text-[10px] text-slate-400 font-medium">
-                    Diskusi Publik Transparan
-                  </span>
-                </div>
-
-                {/* Comment List */}
-                <div className="space-y-2.5">
-                  {(!selectedReport.comments || selectedReport.comments.length === 0) ? (
-                    <p className="text-xs text-slate-400 italic text-center py-3 bg-slate-50 rounded-xl border border-slate-100">
-                      Belum ada tanggapan. Jadilah yang pertama berkomentar!
-                    </p>
-                  ) : (
-                    selectedReport.comments.map((comment) => (
-                      <div
-                        key={comment.id}
-                        className={`rounded-xl p-3 border text-xs flex flex-col gap-1 ${
-                          comment.isOpd
-                            ? 'bg-blue-50/70 border-blue-200/80'
-                            : comment.isMe
-                            ? 'bg-emerald-50/50 border-emerald-200/70'
-                            : 'bg-slate-50/90 border-slate-150'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
-                            <span className="font-bold text-slate-900 truncate">
-                              {comment.author}
-                            </span>
-                            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
-                              comment.isOpd
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-slate-200/80 text-slate-600'
-                            }`}>
-                              {comment.isOpd ? `✓ ${comment.role}` : comment.role}
-                            </span>
-                          </div>
-                          <span className="text-[10px] text-slate-400 shrink-0 font-medium">
-                            {comment.time}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-700 leading-relaxed mt-0.5 break-words">
-                          {comment.text}
-                        </p>
-                      </div>
-                    ))
-                  )}
-                </div>
-
-                {/* Add Comment Form */}
-                <form onSubmit={handleAddComment} className="flex items-center gap-2 pt-1">
-                  <input
-                    type="text"
-                    value={newCommentText}
-                    onChange={(e) => setNewCommentText(e.target.value)}
-                    placeholder="Tulis tanggapan atau info tambahan..."
-                    className="flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
-                  />
-                  <button
-                    type="submit"
-                    disabled={!newCommentText.trim()}
-                    className="py-2 px-3.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white flex items-center gap-1.5 transition-all cursor-pointer disabled:cursor-not-allowed shrink-0"
-                  >
-                    <SendIcon />
-                    <span>Kirim</span>
-                  </button>
-                </form>
-              </div>
             </div>
 
             {/* Modal Bottom Action Footer (Pinned / Shrink-0 with Safe Area) */}
